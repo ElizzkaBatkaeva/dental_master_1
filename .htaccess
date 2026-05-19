@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Если файл или папка существуют - не перенаправляем
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Перенаправляем всё на index.php с параметром route
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+
+# Защита config.php
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
